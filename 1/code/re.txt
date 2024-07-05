@@ -1,0 +1,46 @@
+	public static void retrieveEmployees(){
+		Connection con = getConnection();
+		String result = null;
+		String selectString;
+		selectString = "select * from Employees";
+	    result ="Employee_ID\t\tName\n";
+		try {
+			stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(selectString);
+			while (rs.next()) {
+			    int id = rs.getInt("Employee_ID");
+			    String name = rs.getString("Name");
+			    result+=id+"\t\t"+ name+"\n";
+			}
+			stmt.close();
+			con.close();
+
+		} catch(SQLException ex) {
+			System.err.println("SQLException: " + ex.getMessage());
+		}
+		JOptionPane.showMessageDialog(null, result);
+	}
+	
+	public static void retrieveOrders(){
+		Connection con = getConnection();
+		String result = null;
+		String selectString;
+		selectString = "select * from Orders";
+		result ="Prod_ID\t\tProductName\t\tEmployee_ID\n";
+		try {
+			stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(selectString);
+			while (rs.next()) {
+				int pr_id = rs.getInt("Prod_ID");
+				String prodName = rs.getString("ProductName");
+			    int id = rs.getInt("Employee_ID");
+			    result +=pr_id+"\t\t"+ prodName+"\t\t"+id+"\n";
+			}
+			stmt.close();
+			con.close();
+
+		} catch(SQLException ex) {
+			System.err.println("SQLException: " + ex.getMessage());
+		}
+		JOptionPane.showMessageDialog(null, result);
+	}

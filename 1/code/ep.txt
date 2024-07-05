@@ -1,0 +1,18 @@
+public static void updateEmployeesPrepared(){
+		Connection con = getConnection();
+
+		try {
+			pstmt = con.prepareStatement("update Employees set name = ? where Employee_Id  = ?");
+			pstmt.setString(1, "hemanthbob");		//Note index starts with 1
+			pstmt.setInt(2, 6323);
+
+	   		pstmt.executeUpdate();
+
+			pstmt.close();
+			con.close();
+
+		} catch(SQLException ex) {
+			System.err.println("SQLException: " + ex.getMessage());
+		}
+		JOptionPane.showMessageDialog(null,"Data Updated into Employees Table");
+	}

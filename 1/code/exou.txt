@@ -1,0 +1,44 @@
+Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
+
+                                Connection con=DriverManager.getConnection("jdbc:odbc:Hsv");
+
+                                Statement stmt;			
+
+                         //	Dname=dtext.getText();
+
+			//      istock=Integer.parseInt(dinstock.getText());
+
+                                ostock=Integer.parseInt(dostock.getText());				
+
+				exdate=dexda.getText();
+
+                          /*      selectString="select istock from Drugs where DrugName=Paracetamol";
+
+                                 stmt=con.createStatement();
+
+                                ResultSet rs=stmt.executeQuery(selectString);
+
+                                int istock=rs.getInt("InStock");
+
+				result+=istock;
+
+				stmt.close();  */                        
+
+                 		PreparedStatement pstm=con.prepareStatement("update Drugs Instock where DrugName=?");
+			                      
+                                pstm.setString(1,Dname);
+                               
+                        
+                                pstm.setInt(2,istock);
+
+                                pstm=con.prepareStatement("insert into Drugs(OutStock,Exdate)values(?,?)");
+        
+                                pstm.setInt(3,ostock);
+				                       
+                                pstm.setString(4,exdate);
+
+				pstm.executeUpdate();
+
+                                pstm.close();
+
+                                con.close();
